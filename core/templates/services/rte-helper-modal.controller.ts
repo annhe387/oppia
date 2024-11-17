@@ -441,10 +441,13 @@ export class RteHelperModalComponent {
           }
         } else if (this.componentId === this.COMPONENT_ID_LINK) {
           if (caName === 'text') {
-            // Set the link `text` to the link `url` if the `text` is empty.
-            this.tmpCustomizationArgs[i].value =
-              this.tmpCustomizationArgs[i].value ||
-              this.tmpCustomizationArgs[i - 1].value;
+            // Set the link `text` to the link `url` if the `text` is empty or contains only whitespace.
+            const textValue = this.tmpCustomizationArgs[i].value
+              .toString()
+              .trim();
+            this.tmpCustomizationArgs[i].value = textValue
+              ? this.tmpCustomizationArgs[i].value
+              : this.tmpCustomizationArgs[i - 1].value;
           }
         }
         (
